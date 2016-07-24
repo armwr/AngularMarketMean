@@ -4,11 +4,26 @@
 	
 	angular
 	.module('ngProducts')
-	.controller('productsCtrl', function($scope, $http, productsFactory, $mdSidenav, $mdToast, $mdDialog){
+	.controller('productsCtrl', function($scope, $http, productsFactory, $mdSidenav, $mdToast, $mdDialog) {
+
+		var vm = this;
+
+		vm.openSidebar = openSidebar;
+		vm.closeSidebar = closeSidebar;
+		vm.saveProduct = saveProduct;
+		vm.editProduct = editProduct;
+		vm.saveEdit = saveEdit;
+		vm.deleteProduct = deleteProduct;
+
+		vm.products;
+		vm.product;
+		vm.categories;
+		vm.editing;
+
 
 		productsFactory.getProducts().then(function(products){
-			$scope.products = products.data;
-			$scope.categories = getCategories($scope.products);
+			vm.products = products.data;
+			vm.categories = getCategories(vm.products);
 		})
 
 
@@ -18,46 +33,46 @@
 			email: 'armwr91@gmail.com'
 		}
 
-		$scope.openSidebar = function() {
+		function openSidebar() {
 			$mdSidenav('left').open();
 		}
 
-		$scope.closeSidebar = function() {
+		function closeSidebar() {
 			$mdSidenav('left').close();
 		}
 
-		$scope.saveProduct = function(product) {
+		function saveProduct (product) {
 			if(product) {
-				$scope.product.contact = contact;
-				$scope.products.push(product);
-				$scope.product = {};
-				$scope.closeSidebar();
+				product.contact = contact;
+				vm.products.push(product);
+				vm.product = {};
+				closeSidebar();
 				showToast('Product saved!')
 			}
 		}
 
-		$scope.editProduct = function(product) {
-			$scope.editing = true;
-			$scope.openSidebar();
+		function editProduct(product) {
+			vm.editing = true;
+			openSidebar();
 			$scope.product = product;
 		}
 
-		$scope.saveEdit = function() {
-			$scope.editing = false;
-			$scope.product = {};
-			$scope.closeSidebard();
+		function saveEdit() {
+			vm.editing = false;
+			vm.product = {};
+			closeSidebar();
 			showToast('Edit saved');
 		}
 
-		$scope.deleteProduct = function(event, product) {
+		function deleteProduct(event, product) {
 			var confirm = $mdDialog.confirm()
 			.title('Are you sure you want to delete ' + product.title + ' ?')
 			.ok('Yes')
 			.cancel('No')
 			.targetEvent(event);
 			$mdDialog.show(confirm).then(function() {
-				var index = $scope.products.indexOf(product);
-				$scope.products.splice(index, 1)
+				var index = vm.products.indexOf(product);
+				vm.products.splice(index, 1)
 			},function() {})
 		}
 
