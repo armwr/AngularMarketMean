@@ -9,9 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "angular-animate": "^1.5.7",
-    "angular-aria": "^1.5.7",
-    "angular-material": "^1.1.0-rc.5",
     "mongojs": "^2.4.0"
   }
 }

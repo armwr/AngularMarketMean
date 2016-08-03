@@ -6,7 +6,7 @@
 	.factory('productsFactory', function($http){
 
 		function getProducts() {
-			return $http.get('mock/data.json');
+			return $http.get('/mock');
 		}
 		
 		return {
