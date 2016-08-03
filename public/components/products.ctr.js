@@ -4,10 +4,11 @@
 	
 	angular
 	.module('ngProducts')
-	.controller('productsCtrl', function($scope, $http, productsFactory, $mdSidenav, $mdToast, $mdDialog) {
+	.controller('productsCtrl', function($scope, $http, $mdSidenav, $mdToast, $mdDialog) {
 
 		var vm = this;
 
+		vm.getProducts = getProducts;
 		vm.openSidebar = openSidebar;
 		vm.closeSidebar = closeSidebar;
 		vm.saveProduct = saveProduct;
@@ -21,7 +22,7 @@
 		vm.editing;
 
 
-		productsFactory.getProducts().then(function(products){
+		getProducts().then(function(products){
 			vm.products = products.data;
 			vm.categories = getCategories(vm.products);
 		})
@@ -41,11 +42,20 @@
 			$mdSidenav('left').close();
 		}
 
-		function saveProduct (product) {
+		function getProducts() {
+			return $http.get('/mock');
+ 		}
+
+
+		function saveProduct(product) {
+			console.log(vm.product);
 			if(product) {
-				product.contact = contact;
-				vm.products.push(product);
-				vm.product = {};
+				 product.contact = contact;
+				// vm.products.push(product);
+				 vm.product = {};
+				$http.post('/mock', vm.product).success(function(response){
+					console.log(response);
+				})
 				closeSidebar();
 				showToast('Product saved!')
 			}

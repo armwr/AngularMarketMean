@@ -1,18 +1,19 @@
-(function() {
+// (function() {
 
-	"use strict"
-	angular
-	.module('ngProducts')
-	.factory('productsFactory', function($http){
+// 	"use strict"
+// 	angular
+// 	.module('ngProducts')
+// 	.factory('productsFactory', function($http){
 
-		function getProducts() {
-			return $http.get('/mock');
-		}
+// 		function getProducts() {
+// 			return $http.get('/mock');
+// 		}
+
 		
-		return {
-			getProducts: getProducts
-		}
+// 		return {
+// 			getProducts: getProducts
+// 		}
 
 
-	})
-})()		
+// 	})
+// })()		

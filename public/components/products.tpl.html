@@ -70,7 +70,7 @@
             <input type="text" id="image"
                   ng-model="product.image">
           </md-input-container>
-          <md-button ng-if="!editing" ng-click="vm.saveProduct(product)" class="md-primary">
+          <md-button ng-if="!editing" ng-click="saveProduct(product)" class="md-primary">
             Save
           </md-button>
           <md-button ng-if="editing" ng-click="vm.saveEdit()" class="md-primary">
