@@ -8,6 +8,7 @@
 
 		var vm = this;
 
+
 		// vm.getProducts = getProducts;
 		vm.openSidebar = openSidebar;
 		vm.closeSidebar = closeSidebar;
@@ -19,7 +20,7 @@
 		vm.products;
 		// vm.product;
 		vm.categories;
-		vm.editing;
+		// vm.editing;
 
 
 		getProducts().then(function(products){
@@ -52,13 +53,15 @@
 				$scope.product.contact = contact;
 				// vm.products.push(product);
 				vm.product = {};
-				$http.post('/mock', $scope.product).success(function(response){
-					console.log(response);
+				$http.post('/mock', $scope.product).success(function(response) {
+					console.log(response)
 				})
 				closeSidebar();
 				showToast('Product saved!')
 			}
 		}
+
+
 		function editProduct(product) {
 			vm.editing = true;
 			openSidebar();
@@ -66,16 +69,16 @@
 		}
 
 		function saveEdit() {
-			vm.editing = false;
+			$scope.editing = false;
+			$scope.product = {};
 			$scope.product = {};
 			closeSidebar();
 			showToast('Edit saved');
 		}
 
-		$scope.deleteProduct = function (id) { //event
-			console.log(id);
+		$scope.deleteProduct = function(id) {
 			var confirm = $mdDialog.confirm()
-			.title('Are you sure you want to delete ?') //vm.product.title
+			.title('Are you sure you want to delete ?')
 			.ok('Yes')
 			.cancel('No')
 			.targetEvent(event);

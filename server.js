@@ -24,6 +24,7 @@ app.post('/mock', function(req, res){
 	})
 })
 
+//DELETE
 app.delete('/mock/:id', function(req, res){
 	var id = req.params.id;
 	console.log(id);
